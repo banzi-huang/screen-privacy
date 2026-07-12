@@ -14,7 +14,20 @@ jobs:
         shell: pwsh
         run: |
           mkdir Package -Force
+          mkdir Package\Assets -Force
           copy ScreenMonitor.exe Package\
+
+          # Generate simple PNG logo using .NET
+          $logoPath = "Package\Assets\StoreLogo.png"
+          $bmp = New-Object System.Drawing.Bitmap(150, 150)
+          $g = [System.Drawing.Graphics]::FromImage($bmp)
+          $g.Clear([System.Drawing.Color]::FromArgb(26, 111, 181))
+          $font = New-Object System.Drawing.Font("Arial", 36, [System.Drawing.FontStyle]::Bold)
+          $brush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::White)
+          $g.DrawString("SM", [System.Drawing.PointF]::new(10, 40), $font, $brush)
+          $bmp.Save($logoPath, [System.Drawing.Imaging.ImageFormat]::Png)
+          $g.Dispose(); $bmp.Dispose(); $font.Dispose(); $brush.Dispose()
+          Write-Output "Logo created"
 
           @"
           <?xml version="1.0" encoding="utf-8"?>
