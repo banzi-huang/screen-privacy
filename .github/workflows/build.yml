@@ -1,0 +1,54 @@
+name: Build MSIX
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout EXE
+        uses: actions/checkout@v4
+
+      - name: Build MSIX
+        run: |
+          # Copy EXE and assets to package directory
+          mkdir Package
+          copy ScreenMonitor.exe Package\
+          mkdir Package\Assets
+          # Extract icon from EXE... skip for now, use placeholder
+          
+          # Create manifest
+          echo ^<?xml version="1.0" encoding="utf-8"?^> > Package\AppxManifest.xml
+          echo ^<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"^> >> Package\AppxManifest.xml
+          echo   ^<Identity Name="banzi.ScreenMonitor" Version="1.0.0.0" Publisher="CN=ScreenMonitor" ProcessorArchitecture="x64" /^> >> Package\AppxManifest.xml
+          echo   ^<Properties^> >> Package\AppxManifest.xml
+          echo     ^<DisplayName^>屏幕监控助手^</DisplayName^> >> Package\AppxManifest.xml
+          echo     ^<PublisherDisplayName^>banzi工具^</PublisherDisplayName^> >> Package\AppxManifest.xml
+          echo     ^<Description^>屏幕变化检测提醒工具^</Description^> >> Package\AppxManifest.xml
+          echo     ^<Logo^>Assets\StoreLogo.png^</Logo^> >> Package\AppxManifest.xml
+          echo   ^</Properties^> >> Package\AppxManifest.xml
+          echo   ^<Dependencies^> >> Package\AppxManifest.xml
+          echo     ^<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" /^> >> Package\AppxManifest.xml
+          echo   ^</Dependencies^> >> Package\AppxManifest.xml
+          echo   ^<Resources^> >> Package\AppxManifest.xml
+          echo     ^<Resource Language="zh-CN" /^> >> Package\AppxManifest.xml
+          echo   ^</Resources^> >> Package\AppxManifest.xml
+          echo   ^<Applications^> >> Package\AppxManifest.xml
+          echo     ^<Application Id="App" Executable="ScreenMonitor.exe" EntryPoint="Windows.FullTrustApplication"^> >> Package\AppxManifest.xml
+          echo       ^<uap:VisualElements DisplayName="屏幕监控助手" Description="屏幕变化监控" BackgroundColor="#1a1a2e" Square150x150Logo="Assets\StoreLogo.png" Square44x44Logo="Assets\StoreLogo.png" /^> >> Package\AppxManifest.xml
+          echo     ^</Application^> >> Package\AppxManifest.xml
+          echo   ^</Applications^> >> Package\AppxManifest.xml
+          echo   ^<Capabilities^> >> Package\AppxManifest.xml
+          echo     ^<rescap:Capability Name="runFullTrust" /^> >> Package\AppxManifest.xml
+          echo   ^</Capabilities^> >> Package\AppxManifest.xml
+          echo ^</Package^> >> Package\AppxManifest.xml
+          
+          # Build MSIX with MakeAppx
+          & 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\MakeAppx.exe' pack /d Package /p ScreenMonitor.msix /o
+
+      - name: Upload MSIX
+        uses: actions/upload-artifact@v5
+        with:
+          name: ScreenMonitor
+          path: ScreenMonitor.msix
