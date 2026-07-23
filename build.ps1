@@ -8,9 +8,9 @@ copy ScreenMonitor.exe Package\
 $logo = [System.Drawing.Bitmap]::new(150, 150)
 $g = [System.Drawing.Graphics]::FromImage($logo)
 $g.Clear([System.Drawing.Color]::FromArgb(26, 111, 181))
-$f = [System.Drawing.Font]::new("Arial", 36, [System.Drawing.FontStyle]::Bold)
+$f = [System.Drawing.Font]::new("Arial", 36)
 $b = [System.Drawing.SolidBrush]::new([System.Drawing.Color]::White)
-$g.DrawString("SM", [System.Drawing.PointF]::new(10, 40), $f, $b)
+$g.DrawString("SM", $f, $b, 10, 40)
 $logo.Save("Package\Assets\StoreLogo.png", [System.Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose(); $logo.Dispose(); $f.Dispose(); $b.Dispose()
 
