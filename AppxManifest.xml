@@ -2,9 +2,9 @@
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
-  <Identity Name="banzi.ScreenMonitor" Version="1.0.0.0" Publisher="CN=ScreenMonitor" ProcessorArchitecture="x64" />
+  <Identity Name="banzi.Pro" Version="1.0.0.0" Publisher="CN=AE504AD7-71B7-4D4B-ACD6-CC45812D68E4" ProcessorArchitecture="x64" />
   <Properties>
-    <DisplayName>屏幕监控助手</DisplayName>
+    <DisplayName>屏幕监控助手Pro</DisplayName>
     <PublisherDisplayName>banzi工具</PublisherDisplayName>
     <Description>屏幕变化检测提醒工具</Description>
     <Logo>Assets\StoreLogo.png</Logo>
@@ -17,7 +17,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="ScreenMonitor.exe" EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements DisplayName="屏幕监控助手" Description="屏幕变化监控" BackgroundColor="#1a1a2e" Square150x150Logo="Assets\StoreLogo.png" Square44x44Logo="Assets\StoreLogo.png" />
+      <uap:VisualElements DisplayName="屏幕监控助手Pro" Description="屏幕变化监控" BackgroundColor="#1a1a2e" Square150x150Logo="Assets\StoreLogo.png" Square44x44Logo="Assets\StoreLogo.png" />
     </Application>
   </Applications>
   <Capabilities>
