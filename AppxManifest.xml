@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
-  <Identity Name="banzi.Pro" Version="1.0.0.0" Publisher="CN=AE504AD7-71B7-4D4B-ACD6-CC45812D68E4" ProcessorArchitecture="x64" />
+  <Identity Name="banzi.Pro" Version="1.0.1.0" Publisher="CN=AE504AD7-71B7-4D4B-ACD6-CC45812D68E4" ProcessorArchitecture="x64" />
   <Properties>
     <DisplayName>屏幕监控助手Pro</DisplayName>
     <PublisherDisplayName>banzi工具</PublisherDisplayName>
