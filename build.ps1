@@ -5,6 +5,7 @@ mkdir Package\Assets -Force
 
 copy ScreenMonitor.exe Package\
 copy StoreLogo.png Package\Assets\
+copy icon.ico Package\Assets\
 
 copy AppxManifest.xml Package\
 
